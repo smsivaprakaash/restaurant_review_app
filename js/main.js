@@ -11,8 +11,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
   initMap(); // added 
   fetchNeighborhoods();
   fetchCuisines();
+  Enableserviceworker();
 });
 
+/**
+ * Enable service worker cache.
+ */
+Enableserviceworker = () => {
+  if (!navigator.serviceWorker) return;
+  navigator.serviceWorker.register('/sw.js').then(function(reg) {
+    if (!navigator.serviceWorker.controller) {
+      return;
+    }
+  });
+}
 /**
  * Fetch all neighborhoods and set their HTML.
  */
